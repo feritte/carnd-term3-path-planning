@@ -109,8 +109,8 @@ int main() {
 
           	json msgJson;
 
-          	vector<double> next_x_vals;
-          	vector<double> next_y_vals;
+          	//vector<double> next_x_vals;
+          	//vector<double> next_y_vals;
 
 
           	// TODO: define a path made up of (x,y) points that the car will visit sequentially every .02 seconds
@@ -126,8 +126,8 @@ int main() {
                 previous_path_x.push_back(path_points[0][i]);
                 previous_path_y.push_back(path_points[1][i]);
             }
-          	msgJson["next_x"] = next_x_vals;
-          	msgJson["next_y"] = next_y_vals;
+          	msgJson["next_x"] = previous_path_x;
+          	msgJson["next_y"] = previous_path_y;
 
           	auto msg = "42[\"control\","+ msgJson.dump()+"]";
 
