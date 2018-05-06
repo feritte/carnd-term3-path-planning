@@ -41,7 +41,9 @@ class PathPlanner {
     std::vector<Vehicle> predictions;
 
 public:
-    PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y); // constructor
+    // constructor
+    PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y)
+        : num_lanes(3), lane_width(4), map_s(maps_s), map_x(maps_x), map_y(maps_y) {}
 
     ~PathPlanner();
 

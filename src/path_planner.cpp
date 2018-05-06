@@ -3,14 +3,14 @@
 using Eigen::Matrix3d;
 using Eigen::Vector3d;
 
-PathPlanner::PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y){
-    num_lanes = 3;
-    lane_width = 4.0;
-    map_s = maps_s;
-    map_x(maps_x);
-    map_y(maps_y);
-
-}
+//PathPlanner::PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y){
+//    num_lanes = 3;
+//    lane_width = 4.0;
+//    map_s(maps_s);
+//    map_x(maps_x);
+//    map_y(maps_y);
+//
+//}
 PathPlanner::~PathPlanner(){
 }
 
