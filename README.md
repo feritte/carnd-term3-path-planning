@@ -11,7 +11,11 @@ In this project your goal is to safely navigate around a virtual highway with ot
 Each waypoint in the list contains  [x,y,s,dx,dy] values. x and y are the waypoint's map coordinate position, the s value is the distance along the road to get to that waypoint in meters, the dx and dy values define the unit normal vector pointing outward of the highway loop.
 
 The highway's waypoints loop around so the frenet s value, distance along the road, goes from 0 to 6945.554.
-
+### Overview
+The solution of the problem contains three main parts:
+1. Smoothing the path
+2. Preventing the jerk
+3. Finding the best action based on the cost analysis
 ## Basic Build Instructions
 
 1. Clone this repo.
