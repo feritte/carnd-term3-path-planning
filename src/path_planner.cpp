@@ -3,9 +3,19 @@
 using Eigen::Matrix3d;
 using Eigen::Vector3d;
 
+PathPlanner::PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y){
+    num_lanes = 3;
+    lane_width = 4.0;
+    map_s = maps_s;
+    map_x(maps_x);
+    map_y(maps_y);
+
+}
+PathPlanner::~PathPlanner(){
+}
+
 void PathPlanner::update(double x, double y, double yaw, double s, double end_s, double d,
     std::vector<std::vector<double>> &sensor_fusion, double t) {
-    // std::cout << "Update: " << x << ", " << y << ", " << yaw << ", " << end_s << ", " << d << std::endl;
     current.x = x;
     current.y = y;
     current.s = s;
@@ -36,7 +46,7 @@ vector<vector<double>> PathPlanner::getPath(vector<double> &previous_path_x, vec
     const unsigned long prev_size = previous_path_x.size();
 
     if (this->isDangerous()) {
-        // Emergency braking !!!
+        // Emergency braking if there is a close obstacle
         current.speed -= max_braking_acc * time_delta;
     }
     else if (current.speed > goal.speed) {
@@ -51,7 +61,7 @@ vector<vector<double>> PathPlanner::getPath(vector<double> &previous_path_x, vec
     else if (current.speed > speed_limit) {
         current.speed = speed_limit;
     }
-    // std::cout << "Goal: " << goal.speed << ", " << goal.d << std::endl;
+    
 
     vector<double> ptsx;
     vector<double> ptsy;
@@ -77,7 +87,8 @@ vector<vector<double>> PathPlanner::getPath(vector<double> &previous_path_x, vec
         const double ref_y_prev = previous_path_y[prev_size - 2];
 
         if (ref_x_prev == ref_x) {
-            ptsx.push_back(ref_x_prev - 0.00001);  // Avoid spline regression error
+            // In order to avoid spline regression error
+            ptsx.push_back(ref_x_prev - 0.00001);  
         }
         else {
             ptsx.push_back(ref_x_prev);
@@ -197,7 +208,7 @@ Goal PathPlanner::getGoal() {
         }
     }
 
-    // std::cout << "Lane Speed: " << lane_speed[1] << ", " << lane_speed[2] << ", " << lane_speed[3] << std::endl;
+    
 
     // Convolution lane speed for lane change, this algorithm can generate a 2 lane change behavior
     vector<double> lane_score(static_cast<unsigned long>(num_lanes));
@@ -215,7 +226,7 @@ Goal PathPlanner::getGoal() {
         const double right_score = current.lane < num_lanes - 1 ? lane_score[current.lane + 1] : 0;
         const double score = lane_score[current.lane] * score_threshold;
 
-        // std::cout << current.lane << " of Score: " << left_score << ", " << score << ", " << right_score << std::endl;
+        
         if (left_score > score) {
             if (left_score > right_score) {
                 goal_lane = current.lane - 1;
@@ -237,7 +248,8 @@ Goal PathPlanner::getGoal() {
         goal.speed = lane_speed[goal_lane + 1];
     }
     else {
-        goal.speed = current.speed;  // Avoid AccT when changing lane
+        // Avoid AccT when changing lane
+        goal.speed = current.speed;  
     }
     return goal;
 }

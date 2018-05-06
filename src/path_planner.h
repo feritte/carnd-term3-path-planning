@@ -41,17 +41,16 @@ class PathPlanner {
     std::vector<Vehicle> predictions;
 
 public:
-    PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y)
-        : num_lanes(3), lane_width(4), map_s(maps_s), map_x(maps_x), map_y(maps_y) {}
+    PathPlanner(std::vector<double> &maps_s, std::vector<double> &maps_x, std::vector<double> &maps_y); // constructor
 
-    ~PathPlanner() = default;
+    ~PathPlanner();
 
     void update(double x, double y, double yaw, double s, double end_s, double d,
         std::vector<std::vector<double>> &sensor_fusion, double t);
 
     /**
-    * Check if we need do some emergency braking.
-    * @return True if something is too close.
+    * Check if emergency braking is necessary.
+    * @return True if there is another car which is too close.
     */
     bool isDangerous();
 
@@ -61,7 +60,6 @@ private:
 
     /**
     * Predict the other cars status after T seconds.
-    * In this project, all the cars drives straight, so this function only calculate the car's lane and speed.
     */
     void prediction(std::vector<std::vector<double>> &sensor_fusion, double t);
 
