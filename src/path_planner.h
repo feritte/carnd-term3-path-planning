@@ -46,7 +46,6 @@ public:
         : num_lanes(3), lane_width(4), map_s(maps_s), map_x(maps_x), map_y(maps_y) {}
 
     ~PathPlanner() = default;
-
     void update(double x, double y, double yaw, double s, double end_s, double d,
         std::vector<std::vector<double>> &sensor_fusion, double t);
 
