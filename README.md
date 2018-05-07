@@ -15,17 +15,17 @@ The highway's waypoints loop around so the frenet s value, distance along the ro
 
 This is the path planning project for term 3 of Udacity's self-driving car program. The original repo is [releases tab (https://https://github.com/udacity/CarND-Path-Planning-Project). 
 
-More than 4.5 miles are achieved without any incident as it is seen in screenshot below. 
+More than 6 miles are achieved without any incident as it is seen in screenshot below. 
 
-![Screenshot](/images/Screenshot from 2018-05-07 19-14-28.png)
+![Screenshot](/images/ScreenshotPathPlanning.png)
 
 
 ### Code Organization
 
-All the helper functions inside the main.cpp are moved to the utils.h. 
+All the helper functions inside the main.cpp are moved to the utils.h. Path planner algorith is defined under path-planner class.
 
 The solution of the problem contains three main parts:
-1. Smoothing the path
+1. Smoothing the path : it is done inside the path_planner::getPath(vector<double> &previous_path_x, vector<double> &previous_path_y) by using spline header. And also the last coordinate from the previous frame is used as first point of the next frame, though we only need to send the simulator the second through final points in the second frame. 
 2. Preventing the jerk
 3. Finding the best action based on the cost analysis
 ## Basic Build Instructions
