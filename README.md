@@ -12,6 +12,18 @@ Each waypoint in the list contains  [x,y,s,dx,dy] values. x and y are the waypoi
 
 The highway's waypoints loop around so the frenet s value, distance along the road, goes from 0 to 6945.554.
 ### Overview
+
+This is the path planning project for term 3 of Udacity's self-driving car program. The original repo is [releases tab (https://https://github.com/udacity/CarND-Path-Planning-Project). 
+
+More than 4.5 miles are achieved without any incident as it is seen in screenshot below. 
+
+![Screenshot](/images/Screenshot from 2018-05-07 19-14-28.png)
+
+
+### Code Organization
+
+All the helper functions inside the main.cpp are moved to the utils.h. 
+
 The solution of the problem contains three main parts:
 1. Smoothing the path
 2. Preventing the jerk
