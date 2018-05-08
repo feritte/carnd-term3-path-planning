@@ -26,9 +26,11 @@ All the helper functions inside the main.cpp are moved to the utils.h. Path plan
 
 The solution of the problem contains three main parts:
 1. Smoothing the path : it is done inside the path_planner::getPath(vector<double> &previous_path_x, vector<double> &previous_path_y) by using spline header. And also the last coordinate from the previous frame is used as first point of the next frame, though we only need to send the simulator the second through final points in the second frame. 
-2. Preventing the jerk
-3. Finding the best action based on the cost analysis
-## Basic Build Instructions
+2. Preventing the jerk : acc_limit is used to limit acceleration to 9.9.
+3. Finding the best action based on the cost analysis : Considering the relatively low variance in speeds of the other cars and the relatively large gaps in the simulator , using the three states such as keep in the current lane, change to the left and change to the right is sufficient. GetGoal() function is written for that aim.
+   first it is to check is if we are on the rightmost or leftmost lane. Then by using the prediction function, the next postion for each car around us is etimated and checked if it is necessary to change the lane and then if it is safe to change the lane. In other words, the lane has to be appropriate (can't change right out of the rightmost lane) and it has to be acceptable with respect to the other cars in the lane. 
+   
+### Basic Build Instructions
 
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
